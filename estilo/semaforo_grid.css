@@ -1,0 +1,51 @@
+/* Estructura de cuadrícula */
+#semaforo-container {
+    display: grid;
+    grid-template-rows: auto auto auto 1fr;
+    justify-items: center;
+    gap: 1em;
+    text-align: center;
+    width: 80%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.light-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+.light {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: #0007; /* Negro con transparencia */
+    border: 0.2em solid #000;
+    transition: background-color 0.5s ease;
+}
+
+/* Encender luz en rojo */
+.light.red {
+    background-color: red;
+}
+
+/* Animación de apagado */
+.light-container.unload .light {
+    background-color: #0007;
+}
+
+/* Estilo de los botones */
+button {
+    padding: 0.5em 1em;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+/* Resultados de tiempo de reacción */
+#semaforo-container p {
+    font-size: 1.2em;
+    font-weight: bold;
+}
