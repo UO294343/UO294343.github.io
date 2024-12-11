@@ -1,0 +1,105 @@
+main section:last-child{
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2em;
+    
+}
+
+main section > article {
+    background-color: #1f1f1f;
+    box-shadow: 0 1em 2em #000000;
+    border-radius: 1em;
+    padding: 1em;
+    width: 15em;
+    text-align: center;
+    word-wrap: break-word; /* Evita que las palabras largas salgan del contenedor */
+    max-width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+main section > h2 {
+    display: block;
+    width: 100%;
+    grid-column: 1 / -1; /* Hace que el h2 ocupe todo el ancho de la cuadrícula */
+}
+main section> article h3 {
+    font-size: 1.2em;
+    margin-bottom: 2em;
+    color: #ffffff;
+    
+}
+
+main section:last-of-type > h3 {
+    display: block;
+    width: 100%;
+    grid-column: 1 / -1; /* Hace que el h2 ocupe todo el ancho de la cuadrícula */
+}
+
+main section > article p {
+    font-size: 1em;
+    margin: 1em 0;
+    color: #ffffff;
+}
+
+main section > article img {
+    margin-top: 1em;
+    width: 10em;
+    height: auto;
+    position: relative;
+    transition: 0s;
+    object-fit:contain;
+    border-radius: 0em;
+    max-width: 100%;
+}
+
+
+main > section:nth-of-type(2) input,
+main > section:nth-of-type(2) textarea {
+    width: 50%;
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 0.1em solid #ccc; 
+    border-radius: 0.5em; 
+    box-sizing: border-box;
+}
+
+main > section:nth-of-type(2) input[type="text"]::placeholder,
+main > section:nth-of-type(2) textarea::placeholder {
+    color: #aaa; 
+    font-style: italic;
+}
+
+
+main > section:nth-of-type(2) > button {
+    width: 50%;
+    padding: 10px; 
+    background-color: #AD0600; 
+    color: white; 
+    border: 0.2em outset #AD0600;
+    border-radius: 0.5em; 
+    font-size: 1em; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease;
+}
+
+
+main > section:nth-of-type(2) > button:hover {
+    background-color: #5a0502; 
+    border: 0.2em inset #5a0502; 
+}
+
+
+
+@media (max-width: 799px) { 
+    main > section:nth-of-type(2) input,
+    main > section:nth-of-type(2) textarea {
+        width: 100%;
+    }
+    main > section:nth-of-type(2) > button {
+        width: 100%;
+    }
+}
