@@ -26,7 +26,7 @@ class QuizGame {
     setupEventListeners() {
         this.fileInput.addEventListener('change', this.handleFileUpload.bind(this));
         this.canvas.addEventListener('click', this.handleCanvasClick.bind(this));
-        this.canvas.addEventListener('touchstart', this.handleCanvasTouch.bind(this));
+
     }
 
     handleCanvasClick(event) {
