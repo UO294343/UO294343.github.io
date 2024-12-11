@@ -102,34 +102,42 @@ class Semaforo {
         // Campo de nombre
         const nameLabel = document.createElement("label");
         nameLabel.innerText = "Nombre:";
+        nameLabel.setAttribute("for", "nombre");
         const nameInput = document.createElement("input");
         nameInput.type = "text";
         nameInput.name = "nombre";
+        nameInput.id = "nombre";
         nameInput.required = true;
 
         // Campo de apellidos
         const surnameLabel = document.createElement("label");
         surnameLabel.innerText = "Apellidos:";
+        surnameLabel.setAttribute("for", "apellidos")
         const surnameInput = document.createElement("input");
         surnameInput.type = "text";
         surnameInput.name = "apellidos";
+        surnameInput.id = "apellidos"
         surnameInput.required = true;
 
         // Campo de nivel (solo lectura)
         const levelLabel = document.createElement("label");
         levelLabel.innerText = "Nivel:";
+        levelLabel.setAttribute("for", "nivel")
         const levelInput = document.createElement("input");
         levelInput.type = "text";
         levelInput.name = "nivel";
+        levelInput.id = "nivel";
         levelInput.value = this.difficulty;  // Rellenar con el nivel del juego
         levelInput.readOnly = true;
 
         // Campo de tiempo de reacción (solo lectura)
         const timeLabel = document.createElement("label");
         timeLabel.innerText = "Tiempo de Reacción (segundos):";
+        timeLabel.setAttribute("for", "tiempo_reaccion");
         const timeInput = document.createElement("input");
         timeInput.type = "text";
         timeInput.name = "tiempo_reaccion";
+        timeInput.id = "tiempo_reaccion";
         timeInput.value = reactionTime.toFixed(3);  // Rellenar con el tiempo de reacción
         timeInput.readOnly = true;
 
