@@ -38,14 +38,23 @@
         <h2>Noticias</h2>
         <section>
             <h3>Noticias cargadas desde archivo</h3>
-            <input type="file" accept=".txt">
+            <form>
+                <label for="cargarNoticias">Cargar noticias desde archivo</label>
+                <input type="file" accept=".txt" name="cargarNoticias" id="cargarNoticias"/>
+            </form>
         </section>
         <section>
             <h3>Formulario para añadir nueva noticia</h3>
-            <input type="text" placeholder="Título">
-            <textarea rows="5" cols="33" placeholder="Texto"></textarea>    
-            <input type="text" placeholder="Autor">
-            <button>Añadir noticia</button>
+            <form>
+                <label for="titulo">Título de la noticia</label>
+                <input type="text" placeholder="Título" name="titulo" id="titulo"/>
+                <label for="texto">Texto de la noticia</label>
+                <textarea rows="5" cols="33" placeholder="Texto" name="texto" id="texto"></textarea>
+                <label for="autor">Autor de la noticia</label>    
+                <input type="text" placeholder="Autor" name="autor" id="autor"/>
+                <button>Añadir noticia</button>
+            </form>
+            
         </section>
         <section>
             <h3>Noticias</h3>
