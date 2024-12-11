@@ -1,6 +1,6 @@
 class Circuito {
     constructor() {
-        this.mapContainer = document.querySelector('main > section > input + div');
+        this.mapContainer = null;
         this.routeLine = null;
         this.map = null;
         this.loadXml();
@@ -169,6 +169,14 @@ class Circuito {
 
     // Manejar la carga del archivo KML
     handleKmlFileUpload(file) {
+        if (!this.mapContainer){
+            const div = document.createElement("div");
+            document.querySelector("main > section:nth-of-type(2)").appendChild(div);
+            this.mapContainer = document.querySelector('main > section:nth-of-type(2) div');
+        }
+            
+
+           
         this.map = new google.maps.Map(this.mapContainer, {
             zoom: 15,
             mapId: "DYNAMIC_MAP_ID"
