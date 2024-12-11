@@ -14,13 +14,12 @@ class QuizGame {
         this.gameStarted = false;
 
         // Audio Setup
-        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        this.audioContext = null;
         this.correctSound = null;
         this.incorrectSound = null;
 
         // Bind methods
         this.setupEventListeners();
-        this.loadSounds();
         this.drawInitialScreen();
     }
 
@@ -31,6 +30,9 @@ class QuizGame {
     }
 
     handleCanvasClick(event) {
+        if (!this.audioContext) {
+            this.initializeAudio();
+        }
         if (!this.gameStarted && this.questions.length > 0) {
             this.startQuiz();
         } else if (this.gameStarted) {
@@ -39,6 +41,9 @@ class QuizGame {
     }
 
     handleCanvasTouch(event) {
+        if (!this.audioContext) {
+            this.initializeAudio();
+        }
         if (!this.gameStarted && this.questions.length > 0) {
             this.startQuiz();
         } else if (this.gameStarted) {
@@ -52,29 +57,34 @@ class QuizGame {
         }
     }
     checkAnswer(event) {
-        // Get canvas click coordinates
-        const rect = this.canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-
+        
+        const rect = this.canvas.getBoundingClientRect(); // Dimensiones físicas del lienzo
+        const scaleX = this.canvas.width / rect.width;   // Relación horizontal
+        const scaleY = this.canvas.height / rect.height; // Relación vertical
+    
+        const x = (event.clientX - rect.left) * scaleX;  // Ajustar coordenadas X
+        const y = (event.clientY - rect.top) * scaleY;   // Ajustar coordenadas Y
+    
         const question = this.questions[this.currentQuestionIndex];
         const buttonHeight = 50;
         const buttonWidth = 300;
         const spacing = 20;
-
-        // Check each option button
+    
         question.options.forEach((option, index) => {
             const buttonY = 200 + (buttonHeight + spacing) * index;
             const buttonX = (this.canvas.width - buttonWidth) / 2;
-
-            // Check if click is within button bounds
+    
             if (x >= buttonX && x <= buttonX + buttonWidth &&
                 y >= buttonY && y <= buttonY + buttonHeight) {
-                // Check if the selected option is correct
                 const isCorrect = index === question.answer;
                 this.handleAnswer(isCorrect);
             }
         });
+    }
+
+    initializeAudio() {
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        this.loadSounds();
     }
 
     async loadSounds() {
@@ -238,6 +248,7 @@ class QuizGame {
     }
 
     handleAnswer(isCorrect) {
+ 
         // Stop the timer
         clearInterval(this.timerInterval);
 
