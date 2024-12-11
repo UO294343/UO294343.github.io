@@ -32,19 +32,18 @@
     <p>Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> Quiz F1</p>
     <main>
         <section>
-            <h2>Explora nuestros juegos</h2>
-            <ul>
-                <li><a href="memoria.html">Juego de Memoria</a></li>
-                <li><a href="semaforo.php">Juego de Tiempo de Reacción</a></li>
-                <li><a href="quiz.html">Quiz F1</a></li>
-            </ul>
-        </section>
-        <section>
             <h2>Quiz Interactivo de Pilotos</h2>
-            <p>Responde las preguntas arrastrando las respuestas correctas a la zona indicada.</p>
-            <canvas width="800" height="400"></canvas>
+            
+            <section>
+                <h3>Seleccionar Quiz</h3>
+                <label for="fileInput">Cargar Quiz</label>
+                <input type="file" id="fileInput" name="fileInput" accept=".json" />
+            </section>
+            
+            <canvas width="400" height="600"></canvas>
         </section>
     </main>
+    
     <script src="js/quiz.js"></script>
 </body>
 </html>
