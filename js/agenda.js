@@ -9,57 +9,56 @@ class Agenda {
             method: "GET",
             dataType: "json",
             success: (data) => this.mostrarCarreras(data),
-            error: (err) => console.error("Error al obtener las carreras:", err),
+            error: (err) => this.mostrarError(err),
         });
     }
 
     mostrarCarreras(data) {
-        const contenedor = document.querySelector("main > section");
-        contenedor.innerHTML = ""; // Limpia el contenido previo
+        const $contenedor = $("main > section");
+        $contenedor.empty(); // Limpia el contenido previo
 
         const carreras = data.MRData.RaceTable.Races;
-        const tituloSection = document.createElement("h3");
-        tituloSection.textContent = "Carreras programadas:";
-        contenedor.appendChild(tituloSection);
+
+        if (carreras.length === 0) {
+            $contenedor.append("<p>No hay carreras programadas actualmente.</p>");
+            return;
+        }
+
+        $contenedor.append("<h3>Carreras programadas:</h3>");
+
         carreras.forEach((carrera) => {
             const nombre = carrera.raceName;
             const circuito = carrera.Circuit.circuitName;
             const coordenadas = `Latitud: ${carrera.Circuit.Location.lat}, Longitud: ${carrera.Circuit.Location.long}`;
-            const fecha = `${carrera.date} ${carrera.time.slice(0, 5) || ""}`;
+            const fecha = `${carrera.date} ${carrera.time ? carrera.time.slice(0, 5) : ""}`;
 
             // Crear el artículo para cada carrera
-            const articulo = document.createElement("article");
+            const articulo = `
+                <article>
+                    <h3>${nombre}</h3>
+                    <p><strong>Circuito:</strong> ${circuito}</p>
+                    <p><strong>Coordenadas:</strong> ${coordenadas}</p>
+                    <p><strong>Fecha y hora:</strong> ${fecha}</p>
+                </article>
+            `;
 
-            const titulo = document.createElement("h3");
-            titulo.textContent = nombre;
-            
-
-            const parrafoCircuito = document.createElement("p");
-            parrafoCircuito.textContent = `Circuito: ${circuito}`;
-
-            const parrafoCoordenadas = document.createElement("p");
-            parrafoCoordenadas.textContent = `Coordenadas: ${coordenadas}`;
-
-            const parrafoFecha = document.createElement("p");
-            parrafoFecha.textContent = `Fecha y hora: ${fecha}`;
-
-            // Agregar todo al artículo
-            articulo.appendChild(titulo);
-            articulo.appendChild(parrafoCircuito);
-            articulo.appendChild(parrafoCoordenadas);
-            articulo.appendChild(parrafoFecha);
-
-            // Añadir el artículo al contenedor
-            contenedor.appendChild(articulo);
+            $contenedor.append(articulo);
         });
+    }
+
+    mostrarError(err) {
+        const $contenedor = $("main > section");
+        $contenedor.empty(); // Limpia cualquier contenido previo
+        console.error("Error al obtener las carreras:", err);
+        $contenedor.append("<p>Hubo un error al obtener las carreras. Por favor, inténtalo más tarde.</p>");
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+$(document).ready(() => {
     const agenda = new Agenda();
 
     // Agregar evento al botón
-    document.querySelector("main > input").addEventListener("click", () => {
+    $("main > input").on("click", () => {
         agenda.obtenerCarreras();
     });
 });

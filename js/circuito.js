@@ -9,14 +9,13 @@ class Circuito {
     }
 
     loadXml() {
-        const fileInput = document.querySelector('main > section:first-of-type > input');
-        fileInput.addEventListener('change', (e) => {
+        const fileInput = $('main > section:first-of-type > input');
+        fileInput.on('change', (e) => {
             const file = e.target.files[0];
             if (file) {
                 this.handleXmlFileUpload(file);
             }
-
-        })
+        });
     }
 
     handleXmlFileUpload(file) {
@@ -26,7 +25,7 @@ class Circuito {
             const xmlText = e.target.result;
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-            
+
             const nombre = xmlDoc.querySelector("nombre").textContent;
             const longitudCircuito = xmlDoc.querySelector("longitud_circuito").textContent;
             const longitudCircuitoMedida = xmlDoc.querySelector("longitud_circuito").getAttribute("medida");
@@ -39,9 +38,7 @@ class Circuito {
             const pais = xmlDoc.querySelector("pais").textContent;
 
             const referencias = Array.from(xmlDoc.querySelectorAll('referencias referencia')).map(ref => ref.textContent);
-
             const fotos = Array.from(xmlDoc.querySelectorAll('fotografias fotografia')).map(foto => foto.textContent);
-
             const videos = Array.from(xmlDoc.querySelectorAll('videos video')).map(video => video.textContent);
 
             const salida = {
@@ -55,9 +52,9 @@ class Circuito {
                 medidaDistancia: tramo.querySelector('distancia').getAttribute('medida'),
                 sector: tramo.querySelector('sector').textContent,
                 coordenadas: {
-                  longitud: tramo.querySelector('coordenadas longitud').textContent,
-                  latitud: tramo.querySelector('coordenadas latitud').textContent,
-                  altitud: tramo.querySelector('coordenadas altitud').textContent
+                    longitud: tramo.querySelector('coordenadas longitud').textContent,
+                    latitud: tramo.querySelector('coordenadas latitud').textContent,
+                    altitud: tramo.querySelector('coordenadas altitud').textContent
                 }
             }));
 
@@ -80,7 +77,7 @@ class Circuito {
 
             stringDatos += "<p>Fotos:</p><ul>";
             fotos.forEach(foto => {
-                stringDatos += `<li><img src="xml/${foto}" alt="Foto: ${foto}" style="max-width: 200px; max-height: 150px;"></li>`;
+                stringDatos += `<li><img src="xml/${foto}" alt="Foto: ${foto}"></li>`;
             });
             stringDatos += "</ul>";
 
@@ -126,23 +123,22 @@ class Circuito {
             });
             stringDatos += "</ul>";
 
-            const container = document.querySelector("main > section:first-of-type")
-            container.innerHTML += stringDatos;
+            const container = $("main > section:first-of-type");
+            container.append(stringDatos);
 
-            
         };
         reader.readAsText(file);    
-    
     }
+
     loadSvg() {
-        const fileInput = document.querySelector('main > section:last-of-type > input');
-        fileInput.addEventListener('change', (e) => {
+        const fileInput = $('main > section:last-of-type > input');
+        fileInput.on('change', (e) => {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     const oldSvg = $('main > section:last-of-type > svg');
-                    if (oldSvg) {
+                    if (oldSvg.length) {
                         oldSvg.remove();
                     }
                     const svgContainer = $('main > section:last-of-type');
@@ -155,11 +151,10 @@ class Circuito {
         });
     }
 
-
     // Configurar el evento de carga del archivo
     setupKmlFileInput() {
-        const fileInput = document.querySelector('main > section:nth-of-type(2) > input');
-        fileInput.addEventListener('change', (e) => {
+        const fileInput = $('main > section:nth-of-type(2) > input');
+        fileInput.on('change', (e) => {
             const file = e.target.files[0];
             if (file) {
                 this.handleKmlFileUpload(file);
@@ -169,18 +164,17 @@ class Circuito {
 
     // Manejar la carga del archivo KML
     handleKmlFileUpload(file) {
-        if (!this.mapContainer){
-            const div = document.createElement("div");
-            document.querySelector("main > section:nth-of-type(2)").appendChild(div);
-            this.mapContainer = document.querySelector('main > section:nth-of-type(2) div');
+        if (!this.mapContainer) {
+            const div = $("<div></div>");
+            $("main > section:nth-of-type(2)").append(div);
+            this.mapContainer = $("main > section:nth-of-type(2) div")[0];
         }
-            
 
-           
         this.map = new google.maps.Map(this.mapContainer, {
             zoom: 15,
             mapId: "DYNAMIC_MAP_ID"
         });
+
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -234,7 +228,7 @@ class Circuito {
 
         return { coordinates, markers };
     }
-a
+
     // Dibujar la ruta en el mapa
     drawRoute(coordinates) {
         if (this.routeLine) {
@@ -264,6 +258,6 @@ a
 }
 
 // Iniciar la clase cuando el DOM esté listo
-document.addEventListener("DOMContentLoaded", () => {
+$(document).ready(() => {
     const circuito = new Circuito();
 });

@@ -36,6 +36,18 @@
             
             <section>
                 <h3>Seleccionar Quiz</h3>
+                <p>Carga un quiz desde un archivo JSON siguiendo el siguiente formato:</p>
+                <ul>
+                    <li>Un arreglo de objetos que representan preguntas y respuestas</li>
+                    <li>Cada objeto debe tener las siguientes propiedades:
+                      <ul>
+                        <li><code>question</code>: la pregunta en sí</li>
+                        <li><code>options</code>: un arreglo de opciones de respuesta</li>
+                        <li><code>answer</code>: el índice de la opción correcta (empieza en 0)</li>
+                      </ul>
+                    </li>
+                </ul>
+                  
                 <label for="fileInput">Cargar Quiz</label>
                 <input type="file" id="fileInput" name="fileInput" accept=".json" />
             </section>

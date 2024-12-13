@@ -19,7 +19,7 @@ class Memoria {
             { element: "Ferrari", source: "https://upload.wikimedia.org/wikipedia/de/c/c0/Scuderia_Ferrari_Logo.svg" },
             { element: "Mercedes", source: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Mercedes_AMG_Petronas_F1_Logo.svg" }
         ];
-        return [...elements, ...elements]; // Duplicate elements to make 12 cards
+        return [...elements, ...elements];
     }
 
     shuffleElements() {
@@ -27,7 +27,7 @@ class Memoria {
     }
 
     createCards() {
-        const board = document.querySelector("main > section:last-of-type"); // Ajustado para seleccionar el <section:last-of-type>
+        const board = document.querySelector("main > section:last-of-type");
         this.elements.forEach((item) => {
             const card = document.createElement("article");
             card.setAttribute("data-element", item.element);
@@ -72,14 +72,18 @@ class Memoria {
         const isMatch = this.firstCard.getAttribute("data-element") === this.secondCard.getAttribute("data-element");
 
         if (isMatch) {
-            this.firstCard.setAttribute("data-state", "revealed");
-            this.secondCard.setAttribute("data-state", "revealed");
-            this.resetBoard();
+            this.disableCards();
         } else {
             this.unflipCards();
         }
     }
 
+    disableCards() {
+        this.firstCard.setAttribute("data-state", "revealed");
+        this.secondCard.setAttribute("data-state", "revealed");
+        this.resetBoard();
+    }
+    
     unflipCards() {
         this.lockBoard = true;
 

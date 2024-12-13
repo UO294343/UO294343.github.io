@@ -36,6 +36,7 @@ class Record {
             $records[] = $row;
         }
 
+        $stmt->free_result();
         $stmt->close();
         return $records;
     }
