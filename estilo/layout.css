@@ -107,6 +107,9 @@ main section:last-of-type > svg{
 canvas {
     max-width: 100%;
 }
+input {
+    max-width: 100%;
+}
 /* Especificidad: 0:0:1 */
 @media (max-width: 465px) { 
     header { 
