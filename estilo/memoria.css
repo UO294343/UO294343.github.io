@@ -75,9 +75,33 @@ main > section:last-of-type article img {
     transition: none;
 }
 
+main > section:last-of-type article[data-element="RedBull"] img{
+    background-color: #9a9a9a;
+}
+
+main > section:last-of-type article[data-element="McLaren"] img{
+    background-color: #e285ff;
+}
+
+main > section:last-of-type article[data-element="Alpine"] img {
+    background-color: #2a701e;
+}
+
+main > section:last-of-type article[data-element="AstonMartin"] img{
+    background-color: #ffffff;
+}
+
+main > section:last-of-type article[data-element="Ferrari"] img{
+    background-color: #ffdd00;
+}
+
+main > section:last-of-type article[data-element="Mercedes"] img{
+    background-color: #005bab;
+}
+
 @media (max-width: 1280px) {
     main > section:last-of-type {
-        width: 80%;
+        width: 100%;
     }
 }
 

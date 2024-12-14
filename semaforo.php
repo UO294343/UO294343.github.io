@@ -108,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li><a href="memoria.html">Juego de Memoria</a></li>
                 <li><a href="semaforo.php">Juego de Tiempo de Reacción</a></li>
                 <li><a href="quiz.html">Quiz F1</a></li>
+                <li><a href="strategy_manager.php">F1 Strategy Manager</a></li>
             </ul>
         </section>
 

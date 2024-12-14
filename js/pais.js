@@ -66,9 +66,13 @@ class Meteo {
             url: this.url,
             method: 'GET',
             success: function(datos) {
-                let pronosticoContainer = $("main section").last();
-                
-                pronosticoContainer.empty();
+                let pronosticoContainer = $("main > section + section");
+                if (pronosticoContainer.length > 0) {
+                    pronosticoContainer.empty();
+                } else {
+                    $("main").append("<section></section>");
+                    pronosticoContainer = $("main > section + section");	
+                }
                 pronosticoContainer.append("<h3>Pronóstico del tiempo</h3>");
                 let diasAgregados = new Set(); // Control para asegurar que se agregue solo una entrada por día
 
@@ -108,7 +112,7 @@ class Meteo {
     }
 
     verXML() {
-        document.querySelector("main").insertAdjacentHTML("beforeend", "<section></section>");
+        
         this.cargarDatos();
         $("button").attr("disabled", "disabled");
     }

@@ -497,7 +497,7 @@ if (isset($_GET['action'])) {
     <link rel="stylesheet" href="estilo/layout.css"/>
     <link rel="icon" href="multimedia/imagenes/favicon.ico" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="js/test.js"></script>
+    <script src="js/strategy_manager.js"></script>
     <title>F1 Strategy Manager - F1 Desktop</title>
 </head>
 <body>
@@ -516,6 +516,15 @@ if (isset($_GET['action'])) {
     </header>
     <p>Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> F1 Strategy Manager</p>
     <main>
+        <section>
+            <h2>Explora nuestros juegos</h2>
+            <ul>
+                <li><a href="memoria.html">Juego de Memoria</a></li>
+                <li><a href="semaforo.php">Juego de Tiempo de Reacción</a></li>
+                <li><a href="quiz.html">Quiz F1</a></li>
+                <li><a href="strategy_manager.php">F1 Strategy Manager</a></li>
+            </ul>
+        </section>
         <h2>F1 Strategy Manager</h2>
         <p>En F1 Strategy Manager, tus decisiones afectan directamente el rendimiento del piloto en la carrera. Estos son los principales factores que influyen en la simulación:</p>
         <ul>
@@ -586,9 +595,6 @@ if (isset($_GET['action'])) {
                         echo "<option value='{$circuito['id_circuito']}'>{$circuito['nombre']}</option>";
                     }
                     ?>
-                    <?php if (isset($mensaje_resultado_carrera)) : ?>
-                        <p><?php echo $mensaje_resultado_carrera; ?></p>
-                    <?php endif; ?>
                 </select>
 
                 <label for="equipo">Selecciona Equipo:</label>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+    <meta charset="UTF-8">
+    <!--Autor-->
+    <meta name="author" content="Sergio Riesco Collar">
+    <!--Descripción-->
+    <meta name="description" content="Juego quiz F1">
+    <!--Palabras clave del contenido-->
+    <meta name="keywords" content="f1, quiz">
+    <!--Definir la ventana gráfica-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo/estilo.css">
+    <link rel="stylesheet" href="estilo/layout.css">
+    <link rel="icon" href="multimedia/imagenes/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="js/strategy_manager.js"></script>
+    <title>F1 Strategy Manager - F1 Desktop</title>
+</head>
+<body>
+    <header>
+        <a href="index.html"><h1>F1 Desktop</h1></a>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="piloto.html">Piloto</a>
+            <a href="noticias.html">Noticias</a>
+            <a href="calendario.html">Calendario</a>
+            <a href="metereologia.html">Metereología</a>
+            <a href="circuito.html">Circuito</a>
+            <a href="viajes.php">Viajes</a>
+            <a href="juegos.html">Juegos</a>
+        </nav>  
+    </header>
+    <p>Estás en: <a href="index.html">Inicio</a> &gt;&gt; <a href="juegos.html">Juegos</a> &gt;&gt; F1 Strategy Manager</p>
+    <main>
+        <section>
+            <h2>Explora nuestros juegos</h2>
+            <ul>
+                <li><a href="memoria.html">Juego de Memoria</a></li>
+                <li><a href="semaforo.php">Juego de Tiempo de Reacción</a></li>
+                <li><a href="quiz.html">Quiz F1</a></li>
+                <li><a href="strategy_manager.php">F1 Strategy Manager</a></li>
+            </ul>
+        </section>
+        <h2>F1 Strategy Manager</h2>
+        <p>En F1 Strategy Manager, tus decisiones afectan directamente el rendimiento del piloto en la carrera. Estos son los principales factores que influyen en la simulación:</p>
+        <ul>
+            <li>Circuito: Longitud y número de vueltas juegan un papel clave en la estrategia, teniendo que decidir la más óptima para la longitud total.</li>
+            <li>Condiciones climáticas: El clima puede cambiar inesperadamente, afectando la efectividad de los neumáticos seleccionados.</li>
+            <li>Habilidad del piloto: La pericia y experiencia de tu piloto pueden mejorar o empeorar posiciones.</li>
+            <li>Estrategia de equipo: La elección de combustible inicial y tipo de neumáticos determina la eficiencia en circuitos exigentes o cortos y con condiciones 
+                climáticas adversas.</li>
+        </ul>
+
+       
+        <form method="post"> 
+            <section> 
+                <h2>Crear o Reiniciar Base de Datos</h2> 
+                <button type="submit" name="crear_bd">Crear Base de Datos</button> 
+                 </section>
+        </form> 
+
+
+        <form method="post" enctype="multipart/form-data">
+            <section>
+                <h2>Importar Datos desde CSV</h2>
+                <p>
+                    Por favor, carga un archivo CSV que contenga los datos para las diferentes tablas. 
+                    Asegúrate de que el archivo tenga el siguiente formato:
+                </p>
+                <ul>
+                    <li>
+                        Cada tabla debe estar delimitada por una línea con el nombre de la tabla: <code>#nombre_tabla</code>.
+                    </li>
+                    <li>
+                        Debajo de esta línea, debe haber una fila con los nombres de las columnas de la tabla.
+                    </li>
+                    <li>
+                        Las filas siguientes deben contener los datos, separados por comas.
+                    </li>
+                </ul>
+                <label for="archivo_csv">Archivo CSV:</label>
+                <input type="file" id="archivo_csv" name="archivo_csv" accept=".csv" required="">
+                <button type="submit" name="importar_csv">Importar</button>
+                            </section>
+        </form>
+
+        <form method="post">
+            <section>
+                <h2>Exportar Datos a CSV</h2>
+                <button type="submit" name="exportar_csv">Exportar Todas las Tablas</button>
+                            </section>
+        </form>
+
+        <form method="post">
+            <section>
+                <h2>Simular Carrera</h2>
+                <label for="circuito">Selecciona Circuito:</label>
+                <select id="circuito" name="circuito" required="">
+                    <option value="">Selecciona un circuito</option>
+                    <option value="1">Monza</option><option value="2">Spa-Francorchamps</option><option value="3">Silverstone</option>                </select>
+
+                <label for="equipo">Selecciona Equipo:</label>
+                <select id="equipo" name="equipo" required="">
+                    <option value="">Selecciona un equipo</option>
+                    <option value="1">Ferrari</option><option value="2">Mercedes</option><option value="3">Red Bull Racing</option>                </select>
+
+                <label for="estrategia">Selecciona Estrategia:</label>
+                <select id="estrategia" name="estrategia" required="">
+                    <option value="">Selecciona una estrategia</option>
+                </select>
+                
+
+                <label for="piloto">Selecciona Piloto:</label>
+                <select id="piloto" name="piloto" required="">
+                    <option value="">Selecciona un piloto</option>
+                </select>
+
+                <button type="submit" name="simular_carrera">Simular Carrera</button>
+                                    <p>Carrera simulada con éxito. Condiciones finales: SOLEADO. Posición final: 1.</p>
+                            </section>
+        </form>
+                    <p></p><section>
+              <h3>Resultados del circuito</h3>
+              <ul><li>Posición: 1 - Piloto: Lewis Hamilton - Equipo: Mercedes - Estrategia: Estrategia B</li><li>Posición: 2 - Piloto: Lewis Hamilton - Equipo: Mercedes - Estrategia: Estrategia B</li></ul>
+              </section><p></p>
+                   
+        
+    </main>
+
+
+</body></html>

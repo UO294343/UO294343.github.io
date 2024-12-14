@@ -1,0 +1,20 @@
+[
+    {
+        "question": "¿Quién tiene más títulos en la F1?",
+        "options": [
+            "Lewis Hamilton", 
+            "Michael Schumacher", 
+            "Sebastian Vettel"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "¿Qué piloto debutó en 2022?",
+        "options": [
+            "Oscar Piastri", 
+            "Zhou Guanyu", 
+            "Mick Schumacher"
+        ],
+        "answer": 1
+    }
+]

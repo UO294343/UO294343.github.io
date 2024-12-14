@@ -58,6 +58,15 @@ main article img {
     object-fit: cover;
     border-radius: 0.5em;
 }
+
+main section li img {
+    width: 100%;
+    max-width: 100vh;
+
+    transition: all 0.5s;
+    object-fit: cover;
+    border-radius: 0.5em;
+}
 main article button {
     position: absolute;
     width: 2em;
