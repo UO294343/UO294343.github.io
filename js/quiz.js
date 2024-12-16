@@ -93,7 +93,7 @@ class QuizGame {
             this.correctSound = await this.loadSound('multimedia/audio/correct-sound.mp3');
             this.incorrectSound = await this.loadSound('multimedia/audio/incorrect-sound.mp3');
         } catch (error) {
-            console.error('Error loading sounds:', error);
+            console.error('Error cargando sonidos:', error);
         }
     }
 

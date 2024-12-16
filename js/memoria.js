@@ -15,8 +15,9 @@ class Memoria {
         this.elements = [...this.elements, ...this.elements];
         this.button = null;
         this.matches = 0;
-        this.wrongAudio = null;
-        this.correctAudio = null;
+        this.audioContext = null;
+        this.correctSound = null;
+        this.incorrectSound = null;
         this.addListenerButton();
     }
     addListenerButton() {
@@ -24,12 +25,42 @@ class Memoria {
         this.button.addEventListener("click", this.startGame.bind(this));
     }
     
+
     startGame() {
-        this.createAudios();
+        this.initializeAudio();
         this.button.remove();
         this.shuffleElements();
         this.createElements();
         this.addEventListeners();
+    }
+
+    initializeAudio() {
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        this.loadSounds();
+    }
+
+    async loadSounds() {
+        try {
+            this.correctSound = await this.loadSound('multimedia/audio/correct-sound.mp3');
+            this.incorrectSound = await this.loadSound('multimedia/audio/incorrect-sound.mp3');
+        } catch (error) {
+            console.error('Error cargando sonidos:', error);
+        }
+    }
+
+    async loadSound(url) {
+        const response = await fetch(url);
+        const arrayBuffer = await response.arrayBuffer();
+        return await this.audioContext.decodeAudioData(arrayBuffer);
+    }
+
+    playSound(buffer) {
+        if (buffer) {
+            const source = this.audioContext.createBufferSource();
+            source.buffer = buffer;
+            source.connect(this.audioContext.destination);
+            source.start(0);
+        }
     }
 
     createAudios() {
@@ -93,12 +124,6 @@ class Memoria {
         }
     }
 
-    playCorrectAudio(){
-        this.correctAudio.play();
-    }
-    playWrongAudio(){
-        this.wrongAudio.play(); 
-    }
     checkForMatch() {
         const isMatch = this.firstCard.getAttribute("data-element") === this.secondCard.getAttribute("data-element");
         if (isMatch) {
@@ -106,14 +131,14 @@ class Memoria {
             
             this.matches++;
             setTimeout(() => {
-                this.playCorrectAudio();
+                this.playSound(this.correctSound);
                 if (this.matches === this.elements.length / 2) {
                     alert("¡Has ganado! Reinicia la página para jugar de nuevo.");
                 }
             }, 500);
         } else {
             setTimeout(() => {
-                this.playWrongAudio();
+                this.playSound(this.incorrectSound);
             }, 500);
             this.unflipCards();
         }
