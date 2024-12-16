@@ -17,7 +17,7 @@ header h1 {
 }
 /* Especificidad: 002 */
 header a { 
-    color: #ffffff; 
+    color: #ffffff; /* El color de fondo viene heredado de header */
     text-decoration: none; 
 } 
 /* Especificidad: 002 */
@@ -30,7 +30,7 @@ header + p {
 /* Especificidad: 003 */
 header + p a { 
     text-decoration: none; 
-    color: #AD0600; 
+    color: #AD0600; /* El color de fondo viene heredado de header + p */
 } 
 /* Especificidad: 013 */
 header + p a:hover { 
@@ -49,7 +49,7 @@ nav a.active {
 }
 /* Especificidad: 001 */
 aside {
-    background-color: #f0ecec; 
+    background-color: #f0ecec; /* El color de primer plano viene heredado de body */
 }
 /* Especificidad: 002 */
 main article {
@@ -67,7 +67,7 @@ main article li img {
 /* Especificidad: 003 */
 main article button {
     cursor: pointer;
-    background-color: #fff;
+    background-color: #fff; /* El color de primer plano viene heredado de body */
     font-size: 1em;
     border: none;
     border-radius: 50%;
@@ -90,10 +90,12 @@ ul {
 } 
 /* Especificidad: 021 */
 a[href^="https://"]:visited { 
+    background-color: transparent;
     color: #3e0095; 
 } 
 /* Especificidad: 021 */
 a[href^="https://"]:link { 
+    background-color: transparent;
     color: #0D1282; 
 } 
 /* Especificidad: 001 */
