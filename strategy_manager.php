@@ -488,9 +488,9 @@ if (isset($_GET['action'])) {
     <!--Autor-->
     <meta name="author" content="Sergio Riesco Collar"/>
     <!--Descripción-->
-    <meta name ="description" content ="Juego quiz F1" />
+    <meta name ="description" content ="Juego Estrategia F1" />
     <!--Palabras clave del contenido-->
-    <meta name ="keywords" content ="f1, quiz" />
+    <meta name ="keywords" content ="f1, estrategia, juego" />
     <!--Definir la ventana gráfica-->
     <meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="estilo/estilo.css"/>

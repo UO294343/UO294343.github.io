@@ -1,4 +1,4 @@
-/* Botón principal */
+/* Especificidad: 002 */
 main > input {
     width: auto;
     height: auto;
@@ -12,18 +12,20 @@ main > input {
     box-sizing: border-box;
 }
 
+/* Especificidad: 012 */
 main > input:hover {
     background-color: #5a0502; /*El color de primer plano heredado del padre main > input*/
     border: 0.2em inset #5a0502; 
 }
 
+/* Especificidad: 003 */
 main > section > h3 {
     display: block;
     width: 100%;
     grid-column: 1 / -1; /* Hace que el h3 ocupe todo el ancho de la cuadrícula */
 }
 
-/* Contenedor principal */
+/* Especificidad: 002 */
 main > section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); 
@@ -34,7 +36,7 @@ main > section {
     box-sizing: border-box;
 }
 
-/* Estilo de cada artículo */
+/* Especificidad: 003 */
 main > section > article {
     background: #fff; /*El color de primer plano viene heredado del body en estilo.css*/
     border: 0.1rem solid hsl(0, 0%, 80%);
@@ -48,6 +50,7 @@ main > section > article {
     overflow: auto;
 }
 
+/* Especificidad: 004 */
 main > section > article > h3 {
     background: #AD0600;
     color: #fff;
@@ -57,40 +60,41 @@ main > section > article > h3 {
     border-radius: 0.3rem;
 }
 
+/* Especificidad: 014 */
 main > section > article > p:first-of-type  {
     background-color: #f2f2f2;
     border-radius: 0.3rem;
     padding: 0.5rem;
 }
 
-/* Estilo de los párrafos dentro de los artículos */
+/* Especificidad: 004 */
 main > section > article > p {
     margin: 0.5rem 0;
     font-size: 1rem;
 }
 
-/* Adaptaciones para móviles */
 @media (max-width: 465px) {
+    /* Especificidad: 002 */
     main > input {
         font-size: 0.9em; /* Redefinición del tamaño de fuente definido en main > input*/
         padding: 0.4em 0.8em; /* Redefinición del padding definido en main > input*/
     }
-
+    /* Especificidad: 002 */
     main > section {
         grid-template-columns: 1fr; /* Redifinición de grid-template-columns definido en main > section*/
         gap: 1rem; /* Redifinición de gap definido en main > section*/
         padding: 5%; /* Redifinición de padding definido en main > section */
     }
-
+    /* Especificidad: 003 */
     main > section > article {
         max-width: 100%; /* Redifinición de max-width definido en main > section > article */
         padding: 1.5%; /* Redifinición de padding definido en main > section > article */
     }
-
+    /* Especificidad: 005 */
     main > section > article > header h2 {
         font-size: 1rem; /* Redifinición de font-size definido en main > section > article > header h2 */
     }
-
+    /* Especificidad: 004 */
     main > section > article > p {
         font-size: 0.9rem; /* Redifinición de font-size definido en main > section > article > p */
     }

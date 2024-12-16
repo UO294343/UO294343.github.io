@@ -1,3 +1,4 @@
+/* Especificidad: 012 */
 main section:last-child{
     display: flex;
     gap: 1em;
@@ -6,7 +7,7 @@ main section:last-child{
     padding: 2em;
     
 }
-
+/* Especificidad: 003 */
 main section > article {
     background-color: #1f1f1f;
     box-shadow: 0 1em 2em #000000;
@@ -20,31 +21,32 @@ main section > article {
     position: relative;
     overflow: hidden;
 }
-
+/* Especificidad: 003 */
 main section > h2 {
     display: block;
     width: 100%;
     grid-column: 1 / -1; /* Hace que el h2 ocupe todo el ancho de la cuadrícula */
 }
+/* Especificidad: 004 */
 main section> article h3 {
     font-size: 1.2em;
     margin-bottom: 2em;
     color: #ffffff;
     
 }
-
+/* Especificidad: 013 */
 main section:last-of-type > h3 {
     display: block;
     width: 100%;
     grid-column: 1 / -1; /* Hace que el h2 ocupe todo el ancho de la cuadrícula */
 }
-
+/* Especificidad: 004 */
 main section > article p {
     font-size: 1em;
     margin: 1em 0;
     color: #ffffff;
 }
-
+/* Especificidad: 004 */
 main section > article img {
     margin-top: 1em;
     width: 10em;
@@ -55,8 +57,7 @@ main section > article img {
     border-radius: 0em;
     max-width: 100%;
 }
-
-
+/* Especificidad: 013 */
 main > section:nth-of-type(2) textarea {
     width: 100%;
     padding: 10px; 
@@ -65,7 +66,7 @@ main > section:nth-of-type(2) textarea {
     border-radius: 0.5em; 
     box-sizing: border-box;
 }
-
+/* Especificidad: 024 */
 main > section:nth-of-type(2) input[type="text"]::placeholder,
 main > section:nth-of-type(2) textarea::placeholder {
     color: #aaa; 

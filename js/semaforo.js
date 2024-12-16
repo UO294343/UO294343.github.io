@@ -153,8 +153,11 @@ class Semaforo {
         form.appendChild(timeLabel);
         form.appendChild(timeInput);
         form.appendChild(submitButton);
+        
 
         form.addEventListener("submit", (event) => {
+            //Previene el comportatimento por defecto para que la página no se refresque y cambie la dificultad
+            
             event.preventDefault(); 
         
             const formData = new FormData(form);

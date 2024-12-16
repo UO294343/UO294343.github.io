@@ -23,40 +23,50 @@ class Circuito {
 
         reader.onload = (e) => {
             const xmlText = e.target.result;
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+            const $xmlDoc = $($.parseXML(xmlText));
 
-            const nombre = xmlDoc.querySelector("nombre").textContent;
-            const longitudCircuito = xmlDoc.querySelector("longitud_circuito").textContent;
-            const longitudCircuitoMedida = xmlDoc.querySelector("longitud_circuito").getAttribute("medida");
-            const anchura = xmlDoc.querySelector("anchura").textContent;
-            const anchuraMedida = xmlDoc.querySelector("anchura").getAttribute("medida");
-            const fecha = xmlDoc.querySelector("fecha").textContent;
-            const hora = xmlDoc.querySelector("hora").textContent;
-            const vueltas = xmlDoc.querySelector("vueltas").textContent;
-            const localidad = xmlDoc.querySelector("localidad").textContent;
-            const pais = xmlDoc.querySelector("pais").textContent;
+            const nombre = $xmlDoc.find('nombre').text();
+            const longitudCircuito = $xmlDoc.find('longitud_circuito').text();
+            const longitudCircuitoMedida = $xmlDoc.find('longitud_circuito').attr('medida');
+            const anchura = $xmlDoc.find('anchura').text();
+            const anchuraMedida = $xmlDoc.find('anchura').attr('medida');
+            const fecha = $xmlDoc.find('fecha').text();
+            const hora = $xmlDoc.find('hora').text();
+            const vueltas = $xmlDoc.find('vueltas').text();
+            const localidad = $xmlDoc.find('localidad').text();
+            const pais = $xmlDoc.find('pais').text();
 
-            const referencias = Array.from(xmlDoc.querySelectorAll('referencias referencia')).map(ref => ref.textContent);
-            const fotos = Array.from(xmlDoc.querySelectorAll('fotografias fotografia')).map(foto => foto.textContent);
-            const videos = Array.from(xmlDoc.querySelectorAll('videos video')).map(video => video.textContent);
+            const referencias = $xmlDoc.find('referencias referencia').map(function() {
+                return $(this).text();
+            }).get();
+
+            const fotos = $xmlDoc.find('fotografias fotografia').map(function() {
+                return $(this).text();
+            }).get();
+
+            const videos = $xmlDoc.find('videos video').map(function() {
+                return $(this).text();
+            }).get();
 
             const salida = {
-                longitud: xmlDoc.querySelector('salida coordenadas longitud').textContent,
-                latitud: xmlDoc.querySelector('salida coordenadas latitud').textContent,
-                altitud: xmlDoc.querySelector('salida coordenadas altitud').textContent
+                longitud: $xmlDoc.find('salida coordenadas longitud').text(),
+                latitud: $xmlDoc.find('salida coordenadas latitud').text(),
+                altitud: $xmlDoc.find('salida coordenadas altitud').text()
             };
 
-            const segmentos = Array.from(xmlDoc.querySelectorAll('tramos tramo')).map(tramo => ({
-                distancia: tramo.querySelector('distancia').textContent,
-                medidaDistancia: tramo.querySelector('distancia').getAttribute('medida'),
-                sector: tramo.querySelector('sector').textContent,
-                coordenadas: {
-                    longitud: tramo.querySelector('coordenadas longitud').textContent,
-                    latitud: tramo.querySelector('coordenadas latitud').textContent,
-                    altitud: tramo.querySelector('coordenadas altitud').textContent
-                }
-            }));
+            const segmentos = $xmlDoc.find('tramos tramo').map(function() {
+                const $tramo = $(this);
+                return {
+                    distancia: $tramo.find('distancia').text(),
+                    medidaDistancia: $tramo.find('distancia').attr('medida'),
+                    sector: $tramo.find('sector').text(),
+                    coordenadas: {
+                        longitud: $tramo.find('coordenadas longitud').text(),
+                        latitud: $tramo.find('coordenadas latitud').text(),
+                        altitud: $tramo.find('coordenadas altitud').text()
+                    }
+                };
+            }).get();
 
             let stringDatos = ` 
                 <p>Nombre:${nombre}</p>
@@ -125,7 +135,6 @@ class Circuito {
 
             const container = $("main > section:first-of-type");
             container.append(stringDatos);
-
         };
         reader.readAsText(file);    
     }
@@ -198,33 +207,30 @@ class Circuito {
 
     // Parsear el KML y extraer coordenadas y marcadores
     parseKML(kmlText) {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(kmlText, "text/xml");
-
-        const placemarks = xmlDoc.getElementsByTagName('Placemark');
+        const $xmlDoc = $($.parseXML(kmlText));
         const coordinates = [];
         const markers = [];
 
-        for (let placemark of placemarks) {
-            const coordElements = placemark.getElementsByTagName('coordinates');
-            const nameElements = placemark.getElementsByTagName('name');
+        $xmlDoc.find('Placemark').each(function() {
+            const $placemark = $(this);
+            const $coordElements = $placemark.find('coordinates');
+            const $nameElements = $placemark.find('name');
 
-            if (coordElements.length > 0) {
-                const coordText = coordElements[0].textContent.trim();
+            if ($coordElements.length > 0) {
+                const coordText = $coordElements.first().text().trim();
                 const [lng, lat, alt] = coordText.split(',').map(parseFloat);
-
                 const coord = { lat, lng };
                 coordinates.push(coord);
 
                 // Si tiene nombre y no es "Ruta Completa", crear un marcador
-                if (nameElements.length > 0 && nameElements[0].textContent !== 'Ruta Completa') {
+                if ($nameElements.length > 0 && $nameElements.first().text() !== 'Ruta Completa') {
                     markers.push({
                         position: coord,
-                        title: nameElements[0].textContent
+                        title: $nameElements.first().text()
                     });
                 }
             }
-        }
+        });
 
         return { coordinates, markers };
     }
