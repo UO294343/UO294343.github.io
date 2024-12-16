@@ -72,8 +72,7 @@ main > section:nth-of-type(2) textarea::placeholder {
     background-color: transparent;
     font-style: italic;
 }
-
-
+/* Especificidad: 013 */
 main > section:nth-of-type(2)  button {
     width: 100%;
     padding: 10px; 
@@ -85,8 +84,7 @@ main > section:nth-of-type(2)  button {
     cursor: pointer; 
     transition: background-color 0.3s ease;
 }
-
-
+/* Especificidad: 023 */
 main > section:nth-of-type(2) > button:hover {
     background-color: #5a0502; /*El color de primer plano heredado del padre main > section:nth-of-type(2)  button */ 
     border: 0.2em inset #5a0502; 

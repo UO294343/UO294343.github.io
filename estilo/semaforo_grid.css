@@ -1,5 +1,6 @@
 /* Estructura de cuadrícula */
 
+/* Especificidad: 012 */
 main > section:nth-of-type(2) {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -11,16 +12,17 @@ main > section:nth-of-type(2) {
     margin: 0 auto;
     height: auto;
 }
+/* Especificidad: 013 */
 main > section:nth-of-type(2) > h2 {
     grid-column: 1 / -1;
 }
-
+/* Especificidad: 013 */
 main > section:nth-of-type(2) > p {
     grid-column: 1 / -1;
     font-size: 1.2em;
     font-weight: bold;
 }
-
+/* Especificidad: 013 */
 main > section:nth-of-type(2) > div{
     aspect-ratio: 1;
     border-radius: 50%;
@@ -39,25 +41,25 @@ main > section:nth-of-type(2) > div{
         background-color: red; /* Encendido (rojo) */
     }
 }
-
+/* Especificidad: 012 */
 main.load div {
     animation-name: lightOn;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
 }
-
+/* Especificidad: 022 */
 main.load div:nth-of-type(1) {
     animation-delay: 0s;
 }
-
+/* Especificidad: 022 */
 main.load div:nth-of-type(2) {
     animation-delay: 0.5s;
 }
-
+/* Especificidad: 022 */
 main.load div:nth-of-type(3) {
     animation-delay: 1s;
 }
-
+/* Especificidad: 022 */
 main.load div:nth-of-type(4) {
     animation-delay: 1.5s;
 }
@@ -71,34 +73,34 @@ main.load div:nth-of-type(4) {
         background-color: #0007; /* Apagado */
     }
 }
-
+/* Especificidad: 022 */
 main.unload div:nth-of-type(1) {
     animation-delay: 0s;
 }
-
+/* Especificidad: 022 */
 main.unload div:nth-of-type(2) {
     animation-delay: 0s;
 }
-
+/* Especificidad: 022 */
 main.unload div:nth-of-type(3) {
     animation-delay: 0s;
 }
-
+/* Especificidad: 022 */
 main.unload div:nth-of-type(4) {
     animation-delay: 0s;
 }
-
+/* Especificidad: 012 */
 main.unload div {
     animation-name: out;
     animation-duration: 0.1s;
     animation-fill-mode: forwards;
 }
-
+/* Especificidad: 013 */
 main > section:nth-of-type(2) > button {
     grid-column: 1 / -1;
 }
 
-/* Estilo de los botones */
+/* Especificidad: 001 */
 button {
     padding: 0.5em 1em;
     font-size: 1.2em;

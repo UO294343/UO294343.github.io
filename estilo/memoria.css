@@ -1,4 +1,4 @@
-/* Contenedor principal */
+/* Especificidad: 012 */
 main > section:nth-of-type(3) {
     display: flex;
     flex-wrap: wrap;
@@ -8,13 +8,13 @@ main > section:nth-of-type(3) {
     width: 60%; /* Incrementamos un poco el ancho para dar más espacio */
 }
 
-/* Encabezado que ocupa toda la primera fila */
+/* Especificidad: 013 */
 main > section:nth-of-type(3) > h2 {
     flex-basis: 100%;
     text-align: center;
 }
 
-/* Tarjeta */
+/* Especificidad: 013 */
 main > section:nth-of-type(3) article {
     flex: 0 1 calc(25% - 4em); /* Fuerza 4 columnas */
     max-width: calc(25% - 4em); /* Máximo ancho para mantener proporción */
@@ -33,13 +33,13 @@ main > section:nth-of-type(3) article {
     height: auto;
 }
 
-/* Cuando se voltea o revela */
+/* Especificidad: 023 */
 main > section:nth-of-type(3) article[data-state="flip"],
 main > section:nth-of-type(3) article[data-state="revealed"] {
     transform: rotateY(180deg);
 }
 
-/* Lados de la tarjeta */
+/* Especificidad: 014 */
 main > section:nth-of-type(3) article h3, 
 main > section:nth-of-type(3) article img {
     position: absolute;
@@ -52,7 +52,7 @@ main > section:nth-of-type(3) article img {
     justify-content: center;
 }
 
-/* Frente */
+/* Especificidad: 014 */
 main > section:nth-of-type(3) article h3 {
     background-color: #AD0600;
     border: #000000 solid 0.1em;
@@ -62,7 +62,7 @@ main > section:nth-of-type(3) article h3 {
     text-align: center;
 }
 
-/* Reverso */
+/* Especificidad: 014 */
 main > section:nth-of-type(3) article img {
     transform: rotateY(180deg);
     background-color: #fff;
@@ -74,29 +74,37 @@ main > section:nth-of-type(3) article img {
     transition: none;
 }
 
+/* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="RedBull"] img{
     background-color: #9a9a9a;
 }
 
+/* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="McLaren"] img{
     background-color: #e285ff;
 }
 
+/* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="Alpine"] img {
     background-color: #2a701e;
 }
 
+/* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="AstonMartin"] img{
     background-color: #ffffff;
 }
 
+/* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="Ferrari"] img{
     background-color: #ffdd00;
 }
 
+/* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="Mercedes"] img{
     background-color: #005bab;
 }
+
+/* Especificidad: 001 */
 button {
     background-color: #AD0600;
     cursor: pointer;
@@ -108,12 +116,14 @@ button {
 }
 
 @media (max-width: 1280px) {
+    /* Especificidad: 012 */
     main > section:nth-of-type(3) {
         width: 100%;
     }
 }
 
 @media (max-width: 799px) {
+    /* Especificidad: 012 */
     main > section:nth-of-type(3) {
         width: 100%;
         gap: 0.5em 2em;
@@ -126,9 +136,11 @@ button {
 }
 
 @media (max-width: 465px) {
+    /* Especificidad: 012 */
     main > section:nth-of-type(3) {
         gap: 0.5em 0.5em;
     }
+    /* Especificidad: 013 */
     main > section:nth-of-type(3) article {
         flex: 0 1 calc(25% - 0.5em);
         max-width: calc(25% - 0.5em);
