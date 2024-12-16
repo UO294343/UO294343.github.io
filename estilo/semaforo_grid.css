@@ -26,7 +26,7 @@ main > section:nth-of-type(2) > p {
 main > section:nth-of-type(2) > div{
     aspect-ratio: 1;
     border-radius: 50%;
-    background-color: #0007; /* Negro con transparencia */
+    background-color: #0007; /* El color de primer plano viene de body en estilo.css */
     border: 0.2em solid #000;
     transition: background-color 0.5s ease;
     height: auto;
@@ -67,10 +67,10 @@ main.load div:nth-of-type(4) {
 /* Animación de apagado de luces */
 @keyframes out {
     from {
-        background-color: red; /* Encendido (rojo) */
+        background-color: red; /* Redefinición del color de fondo y el color de primer plano viene de body en estilo.css */
     }
     to {
-        background-color: #0007; /* Apagado */
+        background-color: #0007; /* Redefinición del color de fondo y el color de primer plano viene de body en estilo.css */
     }
 }
 /* Especificidad: 022 */

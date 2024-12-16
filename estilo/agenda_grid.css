@@ -1,3 +1,4 @@
+/* La redefinición de row-gap y column-gap se produce en main > section, no se por qué el warning se produce aquí */
 /* Especificidad: 002 */
 main > input {
     width: auto;
