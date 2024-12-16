@@ -15,8 +15,8 @@ class Memoria {
         this.elements = [...this.elements, ...this.elements];
         this.button = null;
         this.matches = 0;
-        this.wrongAudio = new Audio("multimedia/audio/incorrect-sound.mp3");
-        this.correctAudio = new Audio("multimedia/audio/correct-sound.mp3");
+        this.wrongAudio = null;
+        this.correctAudio = null;
         this.addListenerButton();
     }
     addListenerButton() {
@@ -25,13 +25,21 @@ class Memoria {
     }
     
     startGame() {
+        createAudios();
         this.button.remove();
         this.shuffleElements();
         this.createElements();
         this.addEventListeners();
     }
 
-
+    createAudios() {
+        if (this.wrongAudio === null) {
+            this.wrongAudio = new Audio("multimedia/audio/incorrect-sound.mp3");
+        }
+        if (this.correctAudio === null) {
+            this.correctAudio = new Audio("multimedia/audio/correct-sound.mp3");
+        }
+    }
     shuffleElements() {
         this.elements.sort(() => Math.random() - 0.5);
     }
