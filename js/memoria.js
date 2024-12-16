@@ -25,7 +25,7 @@ class Memoria {
     }
     
     startGame() {
-        createAudios();
+        this.createAudios();
         this.button.remove();
         this.shuffleElements();
         this.createElements();
