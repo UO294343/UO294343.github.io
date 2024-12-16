@@ -1,3 +1,8 @@
+/* Las redefiniciones de column-gap, row-gap, flex-basis, flex-grow, flex-shrink se aplican para 
+los elementos dentro de main > section:nth-of-type(3) para que se distribuyen de forma automática 
+
+No entiendo por qué el warning aparece en esta línea pero es por eso*/
+
 /* Especificidad: 012 */
 main > section:nth-of-type(3) {
     display: flex;
@@ -21,7 +26,7 @@ main > section:nth-of-type(3) article {
     position: relative;
     margin-bottom: 1em; /* Añade un poco de espacio vertical */
     border-radius: 0.5em;
-    background-color: #fff;
+    background-color: #fff; /* El color de primer plano viene de body en estilo.css */
     overflow: visible;
     cursor: pointer;
     transform-style: preserve-3d;
@@ -65,7 +70,6 @@ main > section:nth-of-type(3) article h3 {
 /* Especificidad: 014 */
 main > section:nth-of-type(3) article img {
     transform: rotateY(180deg);
-    background-color: #fff;
     border: 0.1em solid #ddd;
     object-fit: contain; /* Asegura que la imagen se ajuste */
     padding: 0.5em;
@@ -76,32 +80,32 @@ main > section:nth-of-type(3) article img {
 
 /* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="RedBull"] img{
-    background-color: #9a9a9a;
+    background-color: #9a9a9a;  /* El color de primer plano viene de body en estilo.css */
 }
 
 /* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="McLaren"] img{
-    background-color: #e285ff;
+    background-color: #e285ff;  /* El color de primer plano viene de body en estilo.css */
 }
 
 /* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="Alpine"] img {
-    background-color: #2a701e;
+    background-color: #2a701e;  /* El color de primer plano viene de body en estilo.css */
 }
 
 /* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="AstonMartin"] img{
-    background-color: #ffffff;
+    background-color: #ffffff;  /* El color de primer plano viene de body en estilo.css */
 }
 
 /* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="Ferrari"] img{
-    background-color: #ffdd00;
+    background-color: #ffdd00;  /* El color de primer plano viene de body en estilo.css */
 }
 
 /* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="Mercedes"] img{
-    background-color: #005bab;
+    background-color: #005bab;  /* El color de primer plano viene de body en estilo.css */
 }
 
 /* Especificidad: 001 */
@@ -118,31 +122,31 @@ button {
 @media (max-width: 1280px) {
     /* Especificidad: 012 */
     main > section:nth-of-type(3) {
-        width: 100%;
+        width: 100%; /* Redefinición de width */
     }
 }
 
 @media (max-width: 799px) {
     /* Especificidad: 012 */
     main > section:nth-of-type(3) {
-        width: 100%;
-        gap: 0.5em 2em;
+        width: 100%; /* Redefinición de width */
+        gap: 0.5em 2em; /* Redefinición de gap */
     }
 
     main > section:nth-of-type(3) article {
-        flex: 0 1 calc(25% - 2em);
-        max-width: calc(25% - 2em);
+        flex: 0 1 calc(25% - 2em); /* Redefinición de flex */
+        max-width: calc(25% - 2em); /* Redefinición de max-width */
     }
 }
 
 @media (max-width: 465px) {
     /* Especificidad: 012 */
     main > section:nth-of-type(3) {
-        gap: 0.5em 0.5em;
+        gap: 0.5em 0.5em;  /* Redefinición de gap */
     }
     /* Especificidad: 013 */
     main > section:nth-of-type(3) article {
-        flex: 0 1 calc(25% - 0.5em);
-        max-width: calc(25% - 0.5em);
+        flex: 0 1 calc(25% - 0.5em); /* Redefinición de flex */
+        max-width: calc(25% - 0.5em); /* Redefinición de max-width */
     }
 }
