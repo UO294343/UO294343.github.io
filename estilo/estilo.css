@@ -30,7 +30,7 @@ header + p {
 /* Especificidad: 003 */
 header + p a { 
     text-decoration: none; 
-    color: #AD0600; /* El color de fondo viene heredado de header + p */
+    color: #A30500; /* El color de fondo viene heredado de header + p */
 } 
 /* Especificidad: 013 */
 header + p a:hover { 
