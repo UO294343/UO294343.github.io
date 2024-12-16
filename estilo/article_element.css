@@ -9,7 +9,7 @@ main section:last-child{
 }
 /* Especificidad: 003 */
 main section > article {
-    background-color: #1f1f1f;
+    background-color: #1f1f1f; /* El color de primer plano viene de body en estilo.css */
     box-shadow: 0 1em 2em #000000;
     border-radius: 1em;
     padding: 1em;
@@ -31,8 +31,7 @@ main section > h2 {
 main section> article h3 {
     font-size: 1.2em;
     margin-bottom: 2em;
-    color: #ffffff;
-    
+    color: #ffffff; /* El color de fondo viene de main section > article */ 
 }
 /* Especificidad: 013 */
 main section:last-of-type > h3 {
@@ -44,7 +43,7 @@ main section:last-of-type > h3 {
 main section > article p {
     font-size: 1em;
     margin: 1em 0;
-    color: #ffffff;
+    color: #ffffff; /* El color de fondo viene de main section > article */
 }
 /* Especificidad: 004 */
 main section > article img {
@@ -70,6 +69,7 @@ main > section:nth-of-type(2) textarea {
 main > section:nth-of-type(2) input[type="text"]::placeholder,
 main > section:nth-of-type(2) textarea::placeholder {
     color: #aaa; 
+    background-color: transparent;
     font-style: italic;
 }
 
@@ -88,7 +88,7 @@ main > section:nth-of-type(2)  button {
 
 
 main > section:nth-of-type(2) > button:hover {
-    background-color: #5a0502; 
+    background-color: #5a0502; /*El color de primer plano heredado del padre main > section:nth-of-type(2)  button */ 
     border: 0.2em inset #5a0502; 
 }
 

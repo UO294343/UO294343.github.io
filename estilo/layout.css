@@ -164,7 +164,7 @@ form input {
     /* Especificidad: 001 */
     header { 
         flex-direction: column; 
-        align-items: flex-start; 
+        align-items: flex-start; /* Redefinición de align-items */
     } 
     /* Especificidad: 001 */
     nav { 
