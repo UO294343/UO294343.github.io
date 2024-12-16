@@ -85,7 +85,7 @@ class Circuito {
             videos.forEach(video => {
                 stringDatos += `
                 <li>
-                    <video width="320" height="240" controls>
+                    <video controls>
                     <source src="xml/${video}" type="video/mp4">
                     Tu navegador no soporta este formato de video.
                     </video>

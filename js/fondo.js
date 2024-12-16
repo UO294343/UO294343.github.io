@@ -7,11 +7,10 @@ class Fondo {
     }
 
     obtenerImagenFondo() {
-        // Corrected URL with appropriate parameters
         const url = `https://api.flickr.com/services/rest/?method=flickr.photos.search`;
 
         $.getJSON(url, {
-            per_page: 10, // Limit number of results
+            per_page: 10, 
             api_key: this.apiKey, 
             tags: `${this.pais}, ${this.capital}, ${this.circuito}`, 
             text: "Grand Prix Monaco",
@@ -40,7 +39,7 @@ class Fondo {
             "background-size": "cover",
             "background-position": "center",
             "background-repeat": "no-repeat",
-            "min-height": "100vh", // Ensure full screen coverage
+            "min-height": "100vh",
             "margin": "0"
         });
     }

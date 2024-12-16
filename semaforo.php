@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="metereologia.html">Metereología</a> 
             <a href="circuito.html">Circuito</a> 
             <a href="viajes.php">Viajes</a> 
-            <a href="juegos.html">Juegos</a> 
+            <a href="juegos.html" class="active">Juegos</a> 
         </nav>   
     </header>
     <p>Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> Reacción</p>
@@ -112,9 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </ul>
         </section>
 
-        <section id="semaforo-container">
-            <h2>Juego de Tiempo de Reacción</h2>
-        </section>
+        
         
         <?php echo $topRecordsHTML; ?>
         

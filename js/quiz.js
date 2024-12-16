@@ -12,6 +12,7 @@ class QuizGame {
         this.timeLeft = 0;
         this.timerInterval = null;
         this.gameStarted = false;
+        this.canAnswer = true;
 
         // Audio Setup
         this.audioContext = null;
@@ -35,7 +36,7 @@ class QuizGame {
         }
         if (!this.gameStarted && this.questions.length > 0) {
             this.startQuiz();
-        } else if (this.gameStarted) {
+        } else if (this.gameStarted && this.canAnswer) {
             this.checkAnswer(event);
         }
     }
@@ -165,11 +166,11 @@ class QuizGame {
     }
 
     nextQuestion() {
+        this.canAnswer = true;
         if (this.currentQuestionIndex >= this.questions.length) {
             this.endQuiz();
             return;
         }
-
         const question = this.questions[this.currentQuestionIndex];
         this.drawQuestionScreen(question);
         this.startTimer(15); // 15 seconds per question
@@ -248,7 +249,7 @@ class QuizGame {
     }
 
     handleAnswer(isCorrect) {
- 
+        this.canAnswer = false;
         // Stop the timer
         clearInterval(this.timerInterval);
 

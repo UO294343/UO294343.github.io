@@ -114,7 +114,7 @@ $moneda = new Moneda("EUR", "USD");
             <a href="calendario.html">Calendario</a> 
             <a href="metereologia.html">Metereología</a> 
             <a href="circuito.html">Circuito</a> 
-            <a href="viajes.php">Viajes</a> 
+            <a href="viajes.php" class="active">Viajes</a> 
             <a href="juegos.html">Juegos</a> 
         </nav>   
     </header>

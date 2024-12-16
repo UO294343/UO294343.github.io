@@ -4,14 +4,7 @@ class Memoria {
         this.lockBoard = false;
         this.firstCard = null;
         this.secondCard = null;
-        this.elements = this.createElements();
-        this.shuffleElements();
-        this.createCards();
-        this.addEventListeners();
-    }
-
-    createElements() {
-        const elements = [
+        this.elements = [
             { element: "RedBull", source: "https://upload.wikimedia.org/wikipedia/de/c/c4/Red_Bull_Racing_logo.svg" },
             { element: "McLaren", source: "https://upload.wikimedia.org/wikipedia/en/6/66/McLaren_Racing_logo.svg" },
             { element: "Alpine", source: "https://upload.wikimedia.org/wikipedia/fr/b/b7/Alpine_F1_Team_2021_Logo.svg" },
@@ -19,15 +12,36 @@ class Memoria {
             { element: "Ferrari", source: "https://upload.wikimedia.org/wikipedia/de/c/c0/Scuderia_Ferrari_Logo.svg" },
             { element: "Mercedes", source: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Mercedes_AMG_Petronas_F1_Logo.svg" }
         ];
-        return [...elements, ...elements];
+        this.elements = [...this.elements, ...this.elements];
+        this.button = null;
+        this.matches = 0;
+        this.wrongAudio = new Audio("multimedia/audio/incorrect-sound.mp3");
+        this.correctAudio = new Audio("multimedia/audio/correct-sound.mp3");
+        this.addListenerButton();
     }
+    addListenerButton() {
+        this.button = document.querySelector("main > section:nth-of-type(2) > button");
+        this.button.addEventListener("click", this.startGame.bind(this));
+    }
+    
+    startGame() {
+        this.button.remove();
+        this.shuffleElements();
+        this.createElements();
+        this.addEventListeners();
+    }
+
 
     shuffleElements() {
         this.elements.sort(() => Math.random() - 0.5);
     }
 
-    createCards() {
-        const board = document.querySelector("main > section:last-of-type");
+    createElements() {
+        
+        const board = document.createElement("section");
+        const h2 = document.createElement("h2");
+        h2.textContent = "Tablero";
+        board.appendChild(h2);
         this.elements.forEach((item) => {
             const card = document.createElement("article");
             card.setAttribute("data-element", item.element);
@@ -44,6 +58,9 @@ class Memoria {
             card.appendChild(back);
             board.appendChild(card);
         });
+    
+        const main = document.querySelector("main");
+        main.appendChild(board);
     }
     
 
@@ -68,12 +85,28 @@ class Memoria {
         }
     }
 
+    playCorrectAudio(){
+        this.correctAudio.play();
+    }
+    playWrongAudio(){
+        this.wrongAudio.play(); 
+    }
     checkForMatch() {
         const isMatch = this.firstCard.getAttribute("data-element") === this.secondCard.getAttribute("data-element");
-
         if (isMatch) {
             this.disableCards();
+            
+            this.matches++;
+            setTimeout(() => {
+                this.playCorrectAudio();
+                if (this.matches === this.elements.length / 2) {
+                    alert("¡Has ganado! Reinicia la página para jugar de nuevo.");
+                }
+            }, 500);
         } else {
+            setTimeout(() => {
+                this.playWrongAudio();
+            }, 500);
             this.unflipCards();
         }
     }
@@ -83,7 +116,7 @@ class Memoria {
         this.secondCard.setAttribute("data-state", "revealed");
         this.resetBoard();
     }
-    
+
     unflipCards() {
         this.lockBoard = true;
 
@@ -92,6 +125,7 @@ class Memoria {
             this.secondCard.setAttribute("data-state", "hidden");
             this.resetBoard();
         }, 1000);
+        
     }
 
     resetBoard() {

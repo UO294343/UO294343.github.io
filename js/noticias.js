@@ -73,3 +73,4 @@ $(document).ready(function() {
         }
     });
 });
+/* PASA ESTO A MÉTODOS MEJOR */

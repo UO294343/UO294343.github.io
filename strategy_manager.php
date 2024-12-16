@@ -164,8 +164,8 @@ class F1StrategyManager {
             throw new Exception('No se pudo abrir el flujo de salida para el archivo CSV.');
         }
 
-        // Listado de tablas
-        foreach ($this->tablas as $tabla) {
+        $tablas = ["equipos",  "pilotos", "estrategias", "circuitos", "resultados"];
+        foreach ($tablas as $tabla) {
             // Verificar si la tabla existe en la base de datos
             $resultado = $this->conexion->query("SHOW TABLES LIKE '$tabla'");
             if ($resultado->num_rows == 0) {
@@ -511,7 +511,7 @@ if (isset($_GET['action'])) {
             <a href="metereologia.html">Metereología</a>
             <a href="circuito.html">Circuito</a>
             <a href="viajes.php">Viajes</a>
-            <a href="juegos.html">Juegos</a>
+            <a href="juegos.html" class="active">Juegos</a>
         </nav>  
     </header>
     <p>Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> F1 Strategy Manager</p>

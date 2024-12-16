@@ -9,22 +9,20 @@ class Semaforo {
     }
 
     createStructure() {
-        const container = document.getElementById("semaforo-container");
-
+        const main = document.querySelector("main");
+        this.section = document.createElement("section");
         
-
-        const lightContainer = document.createElement("div");
-        lightContainer.classList.add("light-container");
+        const h2 = document.createElement("h2");
+        h2.textContent = 'Juego de Tiempo de Reacción';
+        this.section.appendChild(h2);
         
         // Crear las luces del semáforo
         for (let i = 0; i < this.lights; i++) {
-            const light = document.createElement("div");
-            light.classList.add("light");
-            lightContainer.appendChild(light);
+            const light = document.createElement('div');
+            this.section.appendChild(light);
         }
-        container.appendChild(lightContainer);
-
-        // Botones para iniciar el semáforo y medir la reacción
+        
+        // Botones para iniciar el semáforo 
         this.startButton = document.createElement("button");
         this.startButton.innerText = "Arranque";
         this.startButton.onclick = () => this.initSequence();
@@ -34,56 +32,55 @@ class Semaforo {
         this.reactionButton.disabled = true;
         this.reactionButton.onclick = () => this.stopReaction();
 
-        container.appendChild(this.startButton);
-        container.appendChild(this.reactionButton);
-
-        this.resultDisplay = document.createElement("p");
-        container.appendChild(this.resultDisplay);
+        this.section.appendChild(this.startButton);
+        this.section.appendChild(this.reactionButton);
+        main.appendChild(this.section);
     }
 
     initSequence() {
-        // Eliminar formularios previos
-        const forms = document.querySelectorAll("#semaforo-container + section form");
-        
-        forms.forEach(form => form.remove());
+        this.deleteForms();
+       
 
+        const p = document.querySelector("main > section:nth-of-type(2) p");
+        if (p) {
+            p.remove();
+        }
+        document.querySelector("main").classList.add("load");
         this.startButton.disabled = true;
-        this.resultDisplay.innerText = "";
 
-        const lights = document.querySelectorAll(".light");
-        let delay = 500;
-
-        // Encender luces una a una con un retardo
-        lights.forEach((light, index) => {
-            setTimeout(() => light.classList.add("red"), delay * index);
-        });
-
-        // Iniciar temporizador para el apagado con dificultad
-        const timeout = 2000 + this.difficulty * 1000;
         setTimeout(() => {
             this.unload_moment = new Date();
             this.endSequence();
-        }, timeout);
+        }, 2000 + this.difficulty * 100);
     }
 
-    endSequence() {
-        document.querySelectorAll(".light").forEach(light => {
-            light.classList.remove("red");
-        });
-        document.querySelector(".light-container").classList.add("unload");
 
+    deleteForms() {
+        const formContainer = document.querySelector("main > section:nth-of-type(3)");
+        if (formContainer && formContainer.querySelector("form")) {
+            formContainer.remove();
+        }
+    }
+    endSequence() {
+        document.querySelector("main").classList.add("unload");
         this.reactionButton.disabled = false;
     }
 
     stopReaction() {
         this.clic_moment = new Date();
         const reactionTime = (this.clic_moment - this.unload_moment) / 1000;
-        this.resultDisplay.innerText = `Tu tiempo de reacción: ${reactionTime.toFixed(3)} segundos`;
+        const resultDisplay = document.createElement('p');
+        resultDisplay.innerText = `Tu tiempo de reacción: ${reactionTime.toFixed(3)} segundos`;
+       
+        this.section.appendChild(resultDisplay);
+        
+        const main = document.querySelector('main');
+        main.classList.remove("unload");
+        main.classList.remove("load");
+        
 
         this.startButton.disabled = false;
         this.reactionButton.disabled = true;
-
-        document.querySelector(".light-container").classList.remove("unload");
         this.createRecordForm(reactionTime);
     }
 
