@@ -51,7 +51,7 @@ class Carrusel {
     private function obtenerImagenes() {
         $url = "https://api.flickr.com/services/rest/?method=flickr.photos.search" .
                "&api_key={$this->apiKey}" .
-               "&text=" . urlencode("{$this->pais} {$this->capital} views") .
+               "&text=" . urlencode("{$this->pais} {$this->capital} country") .
                "&format=json&nojsoncallback=1" .
                "&per_page=10";
         

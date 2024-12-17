@@ -10,16 +10,15 @@ class Semaforo {
 
     createStructure() {
         const main = document.querySelector("main");
-        this.section = document.createElement("section");
         
         const h2 = document.createElement("h2");
         h2.textContent = 'Juego de Tiempo de Reacción';
-        this.section.appendChild(h2);
+        main.appendChild(h2);
         
         // Crear las luces del semáforo
         for (let i = 0; i < this.lights; i++) {
             const light = document.createElement('div');
-            this.section.appendChild(light);
+            main.appendChild(light);
         }
         
         // Botones para iniciar el semáforo 
@@ -32,18 +31,17 @@ class Semaforo {
         this.reactionButton.disabled = true;
         this.reactionButton.onclick = () => this.stopReaction();
 
-        this.section.appendChild(this.startButton);
-        this.section.appendChild(this.reactionButton);
-        main.appendChild(this.section);
+        main.appendChild(this.startButton);
+        main.appendChild(this.reactionButton);
     }
 
     initSequence() {
         this.deleteForms();
        
 
-        const p = document.querySelector("main > section:nth-of-type(2) p");
-        if (p) {
-            p.remove();
+        const h3 = document.querySelector("main > h3");
+        if (h3) {
+            h3.remove();
         }
         document.querySelector("main").classList.add("load");
         this.startButton.disabled = true;
@@ -56,7 +54,7 @@ class Semaforo {
 
 
     deleteForms() {
-        const formContainer = document.querySelector("main > section:nth-of-type(3)");
+        const formContainer = document.querySelector("main > section:nth-of-type(2)");
         if (formContainer && formContainer.querySelector("form")) {
             formContainer.remove();
         }
@@ -69,10 +67,11 @@ class Semaforo {
     stopReaction() {
         this.clic_moment = new Date();
         const reactionTime = (this.clic_moment - this.unload_moment) / 1000;
-        const resultDisplay = document.createElement('p');
+        const resultDisplay = document.createElement('h3');
         resultDisplay.innerText = `Tu tiempo de reacción: ${reactionTime.toFixed(3)} segundos`;
-       
-        this.section.appendChild(resultDisplay);
+        
+        const buttonReaction = document.querySelector("main > button:nth-of-type(2)");
+        buttonReaction.after(resultDisplay);
         
         const main = document.querySelector('main');
         main.classList.remove("unload");
@@ -88,7 +87,7 @@ class Semaforo {
         
         const container = document.createElement("section")
 
-        const formTitle = document.createElement("h3");
+        const formTitle = document.createElement("h2");
         formTitle.innerText = "Enviar Record";
         container.appendChild(formTitle);
         // Crear el formulario
@@ -169,17 +168,17 @@ class Semaforo {
             .then(response => response.text())
             .then(data => {
                 const main = document.querySelector("main");
-                const semaphore = document.querySelector("main > section:nth-of-type(2)");
+                const pReaction = document.querySelector("main > p");
 
                 container.remove();
                 
-                if(semaphore) {
-                    semaphore.insertAdjacentHTML("afterend", data);
+                if(pReaction) {
+                    pReaction.insertAdjacentHTML("afterend", data);
                 }else {
                     main.insertAdjacentHTML("beforeend", data);
                 }
 
-                const extraRecordsSection = document.querySelector("main > section:nth-of-type(4)");
+                const extraRecordsSection = document.querySelector("main > section:nth-of-type(3)");
                 if (extraRecordsSection) {
                     extraRecordsSection.remove();
                 }
@@ -193,7 +192,7 @@ class Semaforo {
         container.appendChild(form);
 
         // Agregar el contenedor al DOM
-        document.querySelector("main > section:nth-of-type(2)").after(container);
+        document.querySelector("main > h3").after(container);
     }
 }
 

@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $topRecords = $record->getTopRecords($nivel);
 
     // Generar solo la lista HTML para los top records
-    $html = "<section><h3>Top 10 Records</h3><ol>";
+    $html = "<section><h2>Top 10 Records</h2><ol>";
     foreach ($topRecords as $record) {
         $html .= "<li>{$record['nombre']} {$record['apellidos']} - {$record['tiempo']} segundos</li>";
     }
