@@ -1,24 +1,25 @@
 /* Estructura de cuadrícula */
 
-/* Especificidad: 012 */
+/* Especificidad: 001 */
 main  {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1em;
 }
+/* Especificidad: 002 */
 main > section {
     grid-column: 1 / -1;
 }
-/* Especificidad: 013 */
+/* Especificidad: 002 */
 main > h2 {
     grid-column: 1 / -1;
 }
-/* Especificidad: 013 */
+/* Especificidad: 002 */
 main > h3{
     grid-column: 1 / -1;
     text-align: center;
 }
-/* Especificidad: 012 */
+/* Especificidad: 002 */
 main div{
     aspect-ratio: 1;
     border-radius: 50%;
@@ -101,10 +102,11 @@ button {
     cursor: pointer;
     align-self: center;
 }
+/* Especificidad: 012 */
 main > button:first-of-type {
     grid-column: 1 / -1;
 }
-
+/* Especificidad: 012 */
 main > button:last-of-type {
     grid-column: 1 / -1;
 }
