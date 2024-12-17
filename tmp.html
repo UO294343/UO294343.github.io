@@ -1,9 +1,41 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <script src="js/tmp.js"></script>
-    <title>TEST</title>
+    <title>jQuery Complex Test</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                var elements = $("ul > li").filter(":nth-child(even)").addBack()
+                    .end().closest("div").prevAll().addClass("highlighted")
+                    .end().end().map(function(index, element){
+                        return $(element).has("span");
+                    }).filter(function(){
+                        return $(this).hasClass("highlighted");
+                    }).each(function(index, element){
+                        $(this).css("background-color", "lightblue");
+                    });
+                console.log(elements);
+            });
+        });
+    </script>
+    <style>
+        .highlighted {
+            border: 2px solid red;
+        }
+    </style>
 </head>
 <body>
+
+<button>Click me</button>
+<div>Div 1</div>
+<div>Div 2</div>
+<ul>
+    <li>Item 1</li>
+    <li><span>Item 2</span></li>
+    <li>Item 3</li>
+    <li><span>Item 4</span></li>
+</ul>
+
+</body>
 </html>

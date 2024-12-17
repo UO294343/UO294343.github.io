@@ -1,6 +1,13 @@
 class Agenda {
     constructor() {
         this.baseURL = "https://ergast.com/api/f1/current.json";
+        this.addEventListeners();
+    }
+
+    addEventListeners() {
+        $("main > input").on("click", () => {
+            this.obtenerCarreras();
+        });
     }
 
     obtenerCarreras() {
@@ -57,8 +64,5 @@ class Agenda {
 $(document).ready(() => {
     const agenda = new Agenda();
 
-    // Agregar evento al botón
-    $("main > input").on("click", () => {
-        agenda.obtenerCarreras();
-    });
+    
 });
