@@ -33,18 +33,18 @@ class Pais {
     obtenerInfoSecundaria() {
         return `
             <ul>
-                <li><strong>Circuito de F1:</strong> ${this.nombreCircuitoF1}</li>
-                <li><strong>Población:</strong> ${this.poblacion}</li>
-                <li><strong>Forma de Gobierno:</strong> ${this.formaGobierno}</li>
-                <li><strong>Religión Mayoritaria:</strong> ${this.religionMayoritaria}</li>
+                <li>Circuito de F1: ${this.nombreCircuitoF1}</li>
+                <li>Población: ${this.poblacion}</li>
+                <li>Forma de Gobierno: ${this.formaGobierno}</li>
+                <li>Religión Mayoritaria: ${this.religionMayoritaria}</li>
             </ul>
         `;
     }
 
     // Método para escribir las coordenadas de la línea de meta en el documento HTML
     mostrarCoordenadasEnHTML() {
-        return `Coordenadas de la Línea de Meta: latitud ${this.coordenadasLineaMeta.lat}, longitud ${this.coordenadasLineaMeta.lon}, 
-            altitud ${this.coordenadasLineaMeta.alt}`;
+        document.querySelector("main").insertAdjacentHTML("beforeend", `Coordenadas de la Línea de Meta: latitud ${this.coordenadasLineaMeta.lat}, longitud ${this.coordenadasLineaMeta.lon}, 
+            altitud ${this.coordenadasLineaMeta.alt}`);
     }
 
 }
@@ -128,10 +128,9 @@ document.addEventListener("DOMContentLoaded", function() {
             <p>${pais.obtenerNombrePais()}</p>
             <p>${pais.obtenerNombreCapital()}</p>
             ${pais.obtenerInfoSecundaria()}
-            <p>${pais.mostrarCoordenadasEnHTML()}</p>
         </section>`;
     document.querySelector("main").insertAdjacentHTML("beforeend", informacionPais);
-
+    pais.mostrarCoordenadasEnHTML();
     
 
     var meteo = new Meteo();

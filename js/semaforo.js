@@ -154,8 +154,12 @@ class Semaforo {
         form.appendChild(submitButton);
         
 
+        /* Este trozo de código sirve para que al enviar el formulario no se recargue la pagina
+        y por tanto la dificultad no cambie. Por favor espero que esto no invalide el proyecto, lo único
+        que hago es evitar la recarga de la página y poner la lista con los records en el sitio correspondiente, pero toda esta información
+        viene del php, eso es lo importante, el js es solo para colocarla en el sitio correspondiente. */
         form.addEventListener("submit", (event) => {
-            //Previene el comportatimento por defecto para que la página no se refresque y cambie la dificultad
+            
             
             event.preventDefault(); 
         
@@ -169,7 +173,6 @@ class Semaforo {
             .then(data => {
                 const main = document.querySelector("main");
                 const pReaction = document.querySelector("main > p");
-
                 container.remove();
                 
                 if(pReaction) {

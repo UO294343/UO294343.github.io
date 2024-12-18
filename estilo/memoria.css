@@ -14,7 +14,7 @@ main > section:nth-of-type(3) {
 }
 
 /* Especificidad: 013 */
-main > section:nth-of-type(3) > h2 {
+main > section:nth-of-type(3) > h3 {
     flex-basis: 100%;
     text-align: center;
 }

@@ -1,3 +1,5 @@
+<!-- El HTML tendrá errores por culpa de google maps -->
+
 <?php
 class Moneda {
     private $monedaLocal;

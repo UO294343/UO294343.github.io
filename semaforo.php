@@ -45,7 +45,6 @@ class Record {
         $this->conn->close();
     }
 }
-$topRecordsHTML = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'] ?? '';
@@ -60,13 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $topRecords = $record->getTopRecords($nivel);
 
     // Generar solo la lista HTML para los top records
-    $html = "<section><h2>Top 10 Records</h2><ol>";
+    $topRecordsHTML = "<section><h2>Top 10 Records</h2><ol>";
     foreach ($topRecords as $record) {
-        $html .= "<li>{$record['nombre']} {$record['apellidos']} - {$record['tiempo']} segundos</li>";
+        $topRecordsHTML .= "<li>{$record['nombre']} {$record['apellidos']} - {$record['tiempo']} segundos</li>";
     }
-    $html .= "</ol></section>";
+    $topRecordsHTML .= "</ol></section>";
     // Devolver la lista de registros como respuesta
-    echo $html;
+    echo $topRecordsHTML;
     exit();  // Finaliza el script para evitar otros posibles outputs
 }
 ?>
@@ -108,13 +107,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li><a href="memoria.html">Juego de Memoria</a></li>
                 <li><a href="semaforo.php">Juego de Tiempo de Reacción</a></li>
                 <li><a href="quiz.html">Quiz F1</a></li>
-                <li><a href="strategy_manager.php">F1 Strategy Manager</a></li>
+                <li><a href="php/strategy_manager.php">F1 Strategy Manager</a></li>
             </ul>
         </section>
-
-        
-        
-        <?php echo $topRecordsHTML; ?>
         
     </main>
 

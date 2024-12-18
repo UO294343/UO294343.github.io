@@ -1,7 +1,4 @@
 <?php
-// Archivo principal para gestionar la aplicación de F1 Strategy Manager
-
-// Clase para gestionar la base de datos
 class F1StrategyManager {
     private $conexion;
 
@@ -26,7 +23,7 @@ class F1StrategyManager {
             throw new Exception("Error al leer el archivo SQL.");
         }
 
-        // Dividir el archivo en consultas individuales (suponiendo que cada consulta está separada por ";")
+        // Dividir el archivo en consultas individuales 
         $consultas = explode(';', $contenidoSQL);
 
         // Ejecutar cada consulta de SQL
@@ -96,10 +93,12 @@ class F1StrategyManager {
                         throw new Exception("Error al leer las columnas de la tabla $tablaActual.");
                     }
                     // Preparar la consulta para la tabla actual
+
+                    // Numero de columnas
                     $placeholders = implode(',', array_fill(0, count($columnas), '?'));
-                    $query = "INSERT INTO " . $this->conexion->escape_string($tablaActual) 
-                             . " (" . implode(',', array_map([$this->conexion, 'escape_string'], $columnas)) 
-                             . ") VALUES ($placeholders)";
+
+                    // Consulta 
+                    $query = "INSERT INTO " . $tablaActual. " (" . implode(',', $columnas) . ") VALUES ($placeholders)";
                     try {
                         $stmt = $this->conexion->prepare($query);
                     } catch (Exception $e) {
@@ -121,19 +120,10 @@ class F1StrategyManager {
                     }
     
                     // Vincular parámetros
-                    $tipos = '';
-                    foreach ($fila as &$valor) {
-                        $tipos .= 's';
-                    }
-    
-                    $params = [];
-                    $params[] = &$tipos;
-                    foreach ($fila as &$valor) {
-                        $params[] = &$valor;
-                    }
+                    $tipos = str_repeat('s', count($fila));
+                    $stmt->bind_param($tipos, ...$fila);
                     
-                    call_user_func_array([$stmt, 'bind_param'], $params);
-    
+                    // Ejecutar la consulta
                     if (!$stmt->execute()) {
                         throw new Exception("Error al insertar los datos en la tabla $tablaActual: " . $stmt->error);
                     }
@@ -391,18 +381,6 @@ class F1StrategyManager {
         $stmt->close();
         return $lista_resultados;
     }
-
-    function formularioCrearBD() {
-        echo '<form method="post">
-                <section>
-                    <h2>Crear o Reiniciar Base de Datos</h2>
-                    <button type="submit" name="crear_bd">Crear Base de Datos</button>';
-                    if (isset($mensaje_crear_bd)) {
-                        echo "<p>{$mensaje_crear_bd}</p>";
-                    }
-        echo '  </section>
-              </form>';
-    }
 }   
 
 // Procesamiento de solicitudes
@@ -493,35 +471,35 @@ if (isset($_GET['action'])) {
     <meta name ="keywords" content ="f1, estrategia, juego" />
     <!--Definir la ventana gráfica-->
     <meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="estilo/estilo.css"/>
-    <link rel="stylesheet" href="estilo/layout.css"/>
-    <link rel="icon" href="multimedia/imagenes/favicon.ico" />
+    <link rel="stylesheet" href="../estilo/estilo.css"/>
+    <link rel="stylesheet" href="../estilo/layout.css"/>
+    <link rel="icon" href="../multimedia/imagenes/favicon.ico" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="js/strategy_manager.js"></script>
+    <script src="../js/strategy_manager.js"></script>
     <title>F1 Strategy Manager - F1 Desktop</title>
 </head>
 <body>
     <header>
-        <a href="index.html"><h1>F1 Desktop</h1></a>
+        <a href="../index.html"><h1>F1 Desktop</h1></a>
         <nav>
-            <a href="index.html">Inicio</a>
-            <a href="piloto.html">Piloto</a>
-            <a href="noticias.html">Noticias</a>
-            <a href="calendario.html">Calendario</a>
-            <a href="metereologia.html">Metereología</a>
-            <a href="circuito.html">Circuito</a>
-            <a href="viajes.php">Viajes</a>
-            <a href="juegos.html" class="active">Juegos</a>
+            <a href="../index.html">Inicio</a>
+            <a href="../piloto.html">Piloto</a>
+            <a href="../noticias.html">Noticias</a>
+            <a href="../calendario.html">Calendario</a>
+            <a href="../metereologia.html">Metereología</a>
+            <a href="../circuito.html">Circuito</a>
+            <a href="../viajes.php">Viajes</a>
+            <a href="../juegos.html" class="active">Juegos</a>
         </nav>  
     </header>
-    <p>Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> F1 Strategy Manager</p>
+    <p>Estás en: <a href="../index.html">Inicio</a> >> <a href="../juegos.html">Juegos</a> >> F1 Strategy Manager</p>
     <main>
         <section>
             <h2>Explora nuestros juegos</h2>
             <ul>
-                <li><a href="memoria.html">Juego de Memoria</a></li>
-                <li><a href="semaforo.php">Juego de Tiempo de Reacción</a></li>
-                <li><a href="quiz.html">Quiz F1</a></li>
+                <li><a href="../memoria.html">Juego de Memoria</a></li>
+                <li><a href="../semaforo.php">Juego de Tiempo de Reacción</a></li>
+                <li><a href="../quiz.html">Quiz F1</a></li>
                 <li><a href="strategy_manager.php">F1 Strategy Manager</a></li>
             </ul>
         </section>

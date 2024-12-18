@@ -104,11 +104,11 @@ button {
 }
 /* Especificidad: 012 */
 main > button:first-of-type {
-    grid-column: 1 / -1;
+    grid-column: 1 / -3;
 }
 /* Especificidad: 012 */
 main > button:last-of-type {
-    grid-column: 1 / -1;
+    grid-column: 3 / -1;
 }
 
 
