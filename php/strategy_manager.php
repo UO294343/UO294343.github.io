@@ -9,12 +9,16 @@ class F1StrategyManager {
         }
         $this->listaCondiciones = ['SOLEADO', 'LLUVIOSO', 'NUBLADO'];
         $this->tablas = ["resultados", "estrategias", "pilotos", "circuitos", "equipos"];
-        $this->conexion->query("CREATE DATABASE IF NOT EXISTS $nombreDB");
+        $this->crearTablas(FALSE);
         $this->conexion->select_db($nombreDB);
     }
 
-    public function crearTablas() {
-        $this->borrarTablas();
+
+    public function crearTablas($borrarTablas = true) {
+        if ($borrarTablas) {
+            $this->borrarTablas();
+        }
+        
         // Leer el archivo SQL
         $archivoSQL = 'base_de_datos.sql';
         $contenidoSQL = file_get_contents($archivoSQL);
@@ -516,8 +520,8 @@ if (isset($_GET['action'])) {
        
         <form method="post"> 
             <section> 
-                <h2>Crear o Reiniciar Base de Datos</h2> 
-                <button type="submit" name="crear_bd">Crear Base de Datos</button> 
+                <h2>Crear Datos de Prueba</h2> 
+                <button type="submit" name="crear_bd">Crear Datos</button> 
                 <?php if (isset($mensaje_crear_bd)) : ?> 
                     <p><?php echo $mensaje_crear_bd; ?></p> 
                 <?php endif; ?> </section>

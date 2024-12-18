@@ -78,6 +78,8 @@ main > section:nth-of-type(3) article img {
     transition: none;
 }
 
+/* PRUEBAS DE USABILIDAD */
+
 /* Especificidad: 024 */
 main > section:nth-of-type(3) article[data-element="RedBull"] img{
     background-color: #9a9a9a;  /* El color de primer plano viene de body en estilo.css */

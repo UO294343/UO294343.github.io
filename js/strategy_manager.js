@@ -24,6 +24,7 @@ class F1StrategyManager {
             url: url,
             method: 'GET',
             dataType: 'json',
+            async: false,
             success: callback,
             error: () => callback(null)
         });

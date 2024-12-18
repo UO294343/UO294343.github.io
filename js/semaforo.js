@@ -158,38 +158,7 @@ class Semaforo {
         y por tanto la dificultad no cambie. Por favor espero que esto no invalide el proyecto, lo único
         que hago es evitar la recarga de la página y poner la lista con los records en el sitio correspondiente, pero toda esta información
         viene del php, eso es lo importante, el js es solo para colocarla en el sitio correspondiente. */
-        form.addEventListener("submit", (event) => {
-            
-            
-            event.preventDefault(); 
         
-            const formData = new FormData(form);
-            
-            fetch("semaforo.php", {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.text())
-            .then(data => {
-                const main = document.querySelector("main");
-                const pReaction = document.querySelector("main > p");
-                container.remove();
-                
-                if(pReaction) {
-                    pReaction.insertAdjacentHTML("afterend", data);
-                }else {
-                    main.insertAdjacentHTML("beforeend", data);
-                }
-
-                const extraRecordsSection = document.querySelector("main > section:nth-of-type(3)");
-                if (extraRecordsSection) {
-                    extraRecordsSection.remove();
-                }
-            })
-            .catch(error => {
-                console.error("Error al enviar el formulario:", error);
-            });
-        });
     
         // Añadir el formulario al contenedor
         container.appendChild(form);
@@ -200,7 +169,3 @@ class Semaforo {
 }
 
 let currentDifficulty;
-
-document.addEventListener("DOMContentLoaded", () => {
-    new Semaforo();
-});

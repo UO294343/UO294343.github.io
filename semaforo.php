@@ -46,6 +46,7 @@ class Record {
     }
 }
 
+$topRecordsHTML = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'] ?? '';
     $apellidos = $_POST['apellidos'] ?? '';
@@ -64,10 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $topRecordsHTML .= "<li>{$record['nombre']} {$record['apellidos']} - {$record['tiempo']} segundos</li>";
     }
     $topRecordsHTML .= "</ol></section>";
-    // Devolver la lista de registros como respuesta
-    echo $topRecordsHTML;
-    exit();  // Finaliza el script para evitar otros posibles outputs
-}
+}   
 ?>
 
 
@@ -83,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="estilo/layout.css"/>
     <link rel="stylesheet" href="estilo/semaforo_grid.css"/>
     <link rel="icon" href="multimedia/imagenes/favicon.ico"/>
+    <script src="js/semaforo.js"></script>
     <title>Juego de Tiempo de Reacción - Semáforo</title>
 </head>
 <body>
@@ -110,9 +109,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li><a href="php/strategy_manager.php">F1 Strategy Manager</a></li>
             </ul>
         </section>
-        
+        <script> s = new Semaforo(); </script>
+        <?php echo $topRecordsHTML;?>
     </main>
 
-    <script src="js/semaforo.js"></script>
+    
 </body>
 </html>

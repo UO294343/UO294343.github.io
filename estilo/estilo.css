@@ -87,7 +87,7 @@ ol ol {
 /* Especificidad: 001 */
 ul { 
     list-style-type: square; 
-    font-size: larger;
+    /*font-size: larger;*/
 } 
 /* Especificidad: 021 */
 a[href^="https://"]:visited { 
